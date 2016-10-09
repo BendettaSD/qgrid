@@ -13,7 +13,7 @@ define([path], function(widget) {
 
         render: function() {
             var that = this;
-            var cdn_base_url = this.model.get('_cdn_base_url');
+            var cdn_base_url = document.querySelector('body').getAttribute('data-base-url') + this.model.get('_cdn_base_url');
 
             // Load the custom css
             if ($("#dg-css").length == 0){
