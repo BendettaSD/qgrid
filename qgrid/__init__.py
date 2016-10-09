@@ -6,7 +6,7 @@ from .grid import (
 )
 
 
-def nbinstall(overwrite=False, user=True):
+def nbinstall(overwrite=False, user=True, path=''):
     """
     Copies javascript and css dependencies to the '/nbextensions' folder in
     your IPython directory.
@@ -20,8 +20,10 @@ def nbinstall(overwrite=False, user=True):
     user : bool
         Whether to install to the user's .ipython/nbextensions directory.
         Otherwise do a system-wide install
-        (e.g. /usr/local/share/jupyter/nbextensions).  Defaults to False.
-
+        (e.g. /usr/local/share/jupyter/nbextensions).  Defaults to True.
+    path : string
+        Installs to a specific path. Useful for jupyterhub deployments.
+        Cannot be used with user=True. Specifying user takes precendence.
     Notes
     -----
     After you install qgrid, call this function once before attempting to
@@ -44,11 +46,14 @@ def nbinstall(overwrite=False, user=True):
         'qgridjs',
     )
 
+
+
     install_nbextension(
         qgridjs_path,
         overwrite=overwrite,
         symlink=False,
         verbose=0,
+        **({'nbextensions_path': path} if not user else {}),
         **({'user': user} if version_info >= (3, 0, 0, '') else {})
     )
 
