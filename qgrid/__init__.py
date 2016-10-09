@@ -49,7 +49,6 @@ def nbinstall(overwrite=False, user=True):
         overwrite=overwrite,
         symlink=False,
         verbose=0,
-        nbextensions_dir='/home/jovyan/.local/share/jupyter/nbextensions',
         **({'user': user} if version_info >= (3, 0, 0, '') else {})
     )
 
